@@ -1,0 +1,59 @@
+from random import randint
+
+jeu=[[randint(1,2) for i in range(0,3)] for j in range(0,3)]
+
+# 
+joueur_max = 3
+i_max = 3
+
+# 
+nb_alignements_J1 = 0
+nb_alignements_J2 = 0
+
+# tableau des noms des joueurs
+winner = ["Joueur 1", "Joueur 2", "no_winner"]
+
+# nom du vainqueur
+the_winner = ""
+
+def verifier_alignements():
+  # on accède aux variables externes avec 'global' 
+  global nb_alignements_J1
+  global nb_alignements_J2
+  global jeu
+  global winner
+
+  for l in range(0,3):
+    for c in range(0,3):
+      J1_present = False
+      J2_present = False
+      if jeu[l][c] == 1:
+        J1_present = True
+      else:
+        J2_present = True
+      
+      if J1_present:
+  	    nb_alignements_J1+=1
+      if J2_present:
+  	    nb_alignements_J2+=1
+      
+      if(nb_alignements_J1 >= 3):
+        return winner[0] # "Joueur 1"
+      elif(nb_alignements_J2 >= 3):
+        return winner[1] # "Joueur 2"
+  return winner[2]
+        
+the_winner = verifier_alignements()
+
+print("nb_alignements_J1 =", nb_alignements_J1)
+print("nb_alignements_J2 =", nb_alignements_J2)
+
+for ligne in jeu:
+  print(ligne, end='\n')
+
+if(the_winner != "no_winner"):
+  print("Le gagnant est :", the_winner)
+else:
+  print("Il n'y a pas de gagnant")
+ 
+#copyright by gg ez n00b$ TOM
